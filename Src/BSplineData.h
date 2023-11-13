@@ -69,7 +69,7 @@ template< unsigned int Signature > struct FEMSignature
 unsigned int FEMSignatureDegree( unsigned int signature ){ return signature / BOUNDARY_COUNT; }
 BoundaryType FEMSignatureBType ( unsigned int signature ){ return (BoundaryType)( signature % BOUNDARY_COUNT ); }
 
-static const unsigned int FEMTrivialSignature = FEMDegreeAndBType< 0 , BOUNDARY_FREE >::Signature;
+static const unsigned int FEMTrivialSignature = FEMDegreeAndBType< 0 , BOUNDARY_FREE >::Signature;// 0;
 
 // This class represents a function that is a linear combination of B-spline elements,
 // with the coeff member indicating how much of each element is present.

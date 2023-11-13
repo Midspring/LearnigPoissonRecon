@@ -345,7 +345,7 @@ void Execute( const AuxDataFactory &auxDataFactory )
 	if constexpr( HasAuxData ) _inputSampleFactory = new InputSampleFactory( VertexFactory::PositionFactory< Real , Dim >() , InputSampleDataFactory( VertexFactory::NormalFactory< Real , Dim >() , auxDataFactory ) );
 	else _inputSampleFactory = new InputSampleFactory( VertexFactory::PositionFactory< Real , Dim >() , VertexFactory::NormalFactory< Real , Dim >() );
 	InputSampleFactory &inputSampleFactory = *_inputSampleFactory;
-	XForm< Real , Dim+1 > toModel = XForm< Real , Dim+1 >::Identity();
+	XForm< Real , Dim+1 > toModel = XForm< Real , Dim+1 >::Identity();// transformation matrix
 
 	// Read in the transform, if we want to apply one to the points before processing
 	if( Transform.set )
@@ -681,10 +681,10 @@ int main( int argc , char* argv[] )
 	{
 		typedef VertexFactory::Factory< Real , typename VertexFactory::PositionFactory< Real , DEFAULT_DIMENSION > , typename VertexFactory::NormalFactory< Real , DEFAULT_DIMENSION > > Factory;
 		Factory factory;
-		bool *readFlags = new bool[ factory.plyReadNum() ];
-		std::vector< PlyProperty > unprocessedProperties;
+		bool *readFlags = new bool[ factory.plyReadNum() ]; //bool [ 6 (pointDim:3 + normalDim:3) ]
+		std::vector< PlyProperty > unprocessedProperties;// unprocessed properties, excluding the properties of Factory, in vertices element
 		PLY::ReadVertexHeader( In.value , factory , readFlags , unprocessedProperties );
-		if( !factory.plyValidReadProperties<0>( readFlags ) ) ERROR_OUT( "Ply file does not contain positions" );
+		if( !factory.plyValidReadProperties<0>( readFlags ) ) ERROR_OUT( "Ply file does not contain positions" ); // readFlags checkout
 		if( !factory.plyValidReadProperties<1>( readFlags ) ) ERROR_OUT( "Ply file does not contain normals" );
 		delete[] readFlags;
 

@@ -149,9 +149,10 @@ namespace PLY
 		std::vector< std::string > elist;
 		float version;
 
-		PlyFile *ply = PlyFile::Read( fileName, elist, fileType, version );
+		PlyFile *ply = PlyFile::Read( fileName, elist, fileType, version ); // read header of ply
 		if( !ply ) ERROR_OUT( "Failed to open ply file for reading: " , fileName );
 
+		// Check the property of vertices to be read
 		std::vector< PlyProperty > plist = ply->get_element_description( "vertex" , vNum );
 		if( !plist.size() ) ERROR_OUT( "Failed to get element description: vertex" );
 		for( unsigned int i=0 ; i<vFactory.plyReadNum() ; i++ ) readFlags[i] = false;
@@ -172,7 +173,7 @@ namespace PLY
 	template< typename VertexFactory >
 	inline int ReadVertexHeader( std::string fileName , const VertexFactory &vFactory , bool *readFlags , std::vector< PlyProperty > &unprocessedProperties )
 	{
-		size_t vNum;
+		size_t vNum; // number of vertices
 		return ReadVertexHeader( fileName , vFactory , readFlags , unprocessedProperties , vNum );
 	}
 

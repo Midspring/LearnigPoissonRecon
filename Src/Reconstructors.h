@@ -521,7 +521,7 @@ namespace Reconstructor
 		typedef UIntPack< FEMSignature< FEMSigs >::Degree ... > Degrees;
 
 		// The signature describing the normals elements
-		typedef UIntPack< FEMDegreeAndBType< Poisson::NormalDegree , DerivativeBoundary< FEMSignature< FEMSigs >::BType , 1 >::BType >::Signature ... > NormalSigs;
+		typedef UIntPack< FEMDegreeAndBType< Poisson::NormalDegree , DerivativeBoundary< FEMSignature< FEMSigs >::BType , 1 >::BType >::Signature ... > NormalSigs; //UIntPack<7, 7, 7>
 
 		// Type for tracking sample interpolation
 		typedef typename FEMTree< Dim , Real >::template InterpolationInfo< Real , 0 > InterpolationInfo;
