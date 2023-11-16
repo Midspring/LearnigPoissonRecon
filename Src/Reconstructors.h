@@ -182,26 +182,26 @@ namespace Reconstructor
 		struct SolutionParameters
 		{
 			bool verbose;
-			bool dirichletErode;
+			bool dirichletErode; //?
 			bool outputDensity;
-			bool exactInterpolation;
-			bool showResidual;
+			bool exactInterpolation; //?
+			bool showResidual; //?
 			Real scale;
 			Real confidence;
-			Real confidenceBias;
-			Real lowDepthCutOff;
+			Real confidenceBias; //?
+			Real lowDepthCutOff; //?
 			Real width;
 			Real pointWeight;
 			Real samplesPerNode;
-			Real cgSolverAccuracy;
+			Real cgSolverAccuracy; //?
 			unsigned int depth;
-			unsigned int solveDepth;
-			unsigned int baseDepth;
-			unsigned int fullDepth;
-			unsigned int kernelDepth;
-			unsigned int envelopeDepth;
-			unsigned int baseVCycles;
-			unsigned int iters;
+			unsigned int solveDepth; //?
+			unsigned int baseDepth; //?
+			unsigned int fullDepth; //?
+			unsigned int kernelDepth; //?
+			unsigned int envelopeDepth; //?
+			unsigned int baseVCycles; //?
+			unsigned int iters; //?
 
 			SolutionParameters( void ) :
 				verbose(false) , dirichletErode(false) , outputDensity(false) , exactInterpolation(false) , showResidual(false) ,
@@ -422,7 +422,7 @@ namespace Reconstructor
 		unsigned int maxDim = 0;
 		for( int i=1 ; i<Dim ; i++ ) if( (max[i]-min[i])>(max[maxDim]-min[maxDim]) ) maxDim = i;
 		XForm< Real , Dim+1 > rXForm;
-		for( int i=0 ; i<Dim ; i++ ) rXForm((maxDim+i)%Dim,(Dim-1+i)%Dim) = 1;
+		for( int i=0 ; i<Dim ; i++ ) rXForm((maxDim+i)%Dim,(Dim-1+i)%Dim) = 1; //Rotation maxDim to Y axis
 		rXForm(Dim,Dim) = 1;
 		return rXForm * sXForm * tXForm;
 	}
@@ -510,7 +510,7 @@ namespace Reconstructor
 		static_assert( std::is_same< IsotropicUIntPack< Dim , FEMSig > , UIntPack< FEMSigs... > >::value , "[ERROR] Signatures don't match" );
 
 		// The signature for the finite-elements representing the auxiliary data (if it's there)
-		static const unsigned int DataSig = FEMDegreeAndBType< Reconstructor::DataDegree , BOUNDARY_FREE >::Signature;
+		static const unsigned int DataSig = FEMDegreeAndBType< Reconstructor::DataDegree , BOUNDARY_FREE >::Signature; //FEMDegreeAndBType<0, 0> = 0;
 
 		///////////////
 		// Types --> //
@@ -628,7 +628,7 @@ namespace Reconstructor
 				TransformedInputSampleStream< Real , Dim > _pointStream( modelToUnitCube , pointStream );
 #endif // DE_VIRTUALIZE_OUTPUT
 				auto ProcessDataWithConfidence = [&]( const Point< Real , Dim > &p , NormalAndAuxData &d )
-					{
+					{ //! NOTION(shanchengzi): have not normalized the normal
 						Real l = (Real)Length( d );
 						if( !l || !std::isfinite( l ) ) return (Real)-1.;
 						return (Real)pow( l , params.confidence );
@@ -637,7 +637,7 @@ namespace Reconstructor
 					{
 						Real l = (Real)Length( d );
 						if( !l || !std::isfinite( l ) ) return (Real)-1.;
-						d /= l;
+						d /= l; //! NOTION: normalize the normal
 						return (Real)1.;
 					};
 
@@ -654,6 +654,7 @@ namespace Reconstructor
 				std::cout << "# Read input into tree: " << profiler << std::endl;
 			}
 		}
+
 		{
 			DenseNodeData< Real , Sigs > constraints;
 			InterpolationInfo *iInfo = NULL;

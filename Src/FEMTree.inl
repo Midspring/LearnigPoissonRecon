@@ -347,7 +347,7 @@ void FEMTree< Dim , Real >::slice( const FEMTree< Dim+1 , Real > &tree , unsigne
 template< unsigned int Dim , class Real >
 FEMTree< Dim , Real >::FEMTree( size_t blockSize ) : _nodeInitializer( *this ) , _depthOffset(1)
 {
-	if( blockSize )
+	if( blockSize ) //4096
 	{
 		nodeAllocators.resize( std::thread::hardware_concurrency() );
 		for( size_t i=0 ; i<nodeAllocators.size() ; i++ )

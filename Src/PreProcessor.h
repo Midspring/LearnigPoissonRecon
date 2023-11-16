@@ -46,6 +46,6 @@ DAMAGE.
 #endif // BIG_DATA
 
 #define ADAPTIVE_SOLVERS_VERSION "15.03"		// The version of the code
-#define MEMORY_ALLOCATOR_BLOCK_SIZE 1<<12		// The chunk size for memory allocation
+#define MEMORY_ALLOCATOR_BLOCK_SIZE 1<<12		// The chunk size for memory allocation // 4096
 
 #endif // PRE_PROCESSOR_INCLUDED

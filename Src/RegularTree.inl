@@ -125,7 +125,7 @@ bool RegularTreeNode< Dim , NodeData , DepthAndOffsetType >::_initChildren( Allo
 	else
 	{
 		if( children ) delete[] children;
-		children = new RegularTreeNode[ 1<<Dim ];
+		children = new RegularTreeNode[ 1<<Dim ]; // 2^Dim
 	}
 	if( !children ) ERROR_OUT( "Failed to initialize children" );
 	for( int idx=0 ; idx<(1<<Dim) ; idx++ )
