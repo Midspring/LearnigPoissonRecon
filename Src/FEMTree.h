@@ -2880,7 +2880,7 @@ public:
 		}
 		else
 		{
-			_nodeCount = 0;
+			_nodeCount = 0; //! NOTAION(shanchengzi)
 			auto nodeFunctor = [&]( FEMTreeNode *node )
 			{
 				_nodeInitializer( *node );
@@ -2974,7 +2974,7 @@ struct FEMTreeInitializer
 	{
 		friend FEMTreeInitializer;
 	protected:
-		std::vector< node_index_type > _nodeToIndexMap;
+		std::vector< node_index_type > _nodeToIndexMap; // fem tree node index to samp point index 
 	};
 
 	template< typename Data >

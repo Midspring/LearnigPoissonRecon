@@ -37,7 +37,7 @@ DAMAGE.
 namespace Reconstructor
 {
 	static const unsigned int DataDegree = 0;	// The order of the B-Spline used to splat in data for auxiliary data interpolation
-	static const unsigned int WeightDegree = 2;	// The order of the B-Spline used to splat in the weights for density estimation
+	static const unsigned int WeightDegree = 2;	// The order of the B-Spline used to splat in the weights for density estimation /// density degree
 
 	// For clarity, to distinguies betwen the case that a Point is referencing a position and a normal
 	template< typename Real , unsigned int Dim > using Position = Point< Real , Dim >;
@@ -198,7 +198,7 @@ namespace Reconstructor
 			unsigned int solveDepth; //?
 			unsigned int baseDepth; //?
 			unsigned int fullDepth; //?
-			unsigned int kernelDepth; //?
+			unsigned int kernelDepth; /// splat depth
 			unsigned int envelopeDepth; //?
 			unsigned int baseVCycles; //?
 			unsigned int iters; //?
@@ -515,7 +515,7 @@ namespace Reconstructor
 		///////////////
 		// Types --> //
 		// The packed finite elements signature
-		typedef UIntPack< FEMSigs ... > Sigs;
+		typedef UIntPack< FEMSigs ... > Sigs; // UIntPack< 5, 5, 5>
 
 		// The degrees of the finite elements across the different axes
 		typedef UIntPack< FEMSignature< FEMSigs >::Degree ... > Degrees;
