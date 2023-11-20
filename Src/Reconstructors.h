@@ -518,7 +518,7 @@ namespace Reconstructor
 		typedef UIntPack< FEMSigs ... > Sigs; // UIntPack< 5, 5, 5>
 
 		// The degrees of the finite elements across the different axes
-		typedef UIntPack< FEMSignature< FEMSigs >::Degree ... > Degrees;
+		typedef UIntPack< FEMSignature< FEMSigs >::Degree ... > Degrees; // UIntPack<1, 1, 1>
 
 		// The signature describing the normals elements
 		typedef UIntPack< FEMDegreeAndBType< Poisson::NormalDegree , DerivativeBoundary< FEMSignature< FEMSigs >::BType , 1 >::BType >::Signature ... > NormalSigs; //UIntPack<7, 7, 7>
