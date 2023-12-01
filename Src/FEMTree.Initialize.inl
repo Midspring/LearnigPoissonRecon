@@ -66,7 +66,7 @@ size_t FEMTreeInitializer< Dim , Real >::Initialize( StreamInitializationData &s
 
 	auto Leaf = [&]( FEMTreeNode& root , Point< Real , Dim > p , unsigned int maxDepth )
 	{
-		for( int d=0 ; d<Dim ; d++ ) if( p[d]<0 || p[d]>1 ) return (FEMTreeNode*)NULL; // point is scaled to unit
+		for( int d=0 ; d<Dim ; d++ ) if( p[d]<0 || p[d]>1 ) return (FEMTreeNode*)NULL; // point has been scaled to unit
 		Point< Real , Dim > center;
 		Real width;
 		typename FEMTree< Dim , Real >::LocalDepth depth;

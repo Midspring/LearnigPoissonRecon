@@ -628,7 +628,7 @@ namespace Reconstructor
 				TransformedInputSampleStream< Real , Dim > _pointStream( modelToUnitCube , pointStream );
 #endif // DE_VIRTUALIZE_OUTPUT
 				auto ProcessDataWithConfidence = [&]( const Point< Real , Dim > &p , NormalAndAuxData &d )
-					{ //! NOTION(shanchengzi): have not normalized the normal
+					{ //! NOTION(shanchengzi): do not normalized the normal
 						Real l = (Real)Length( d );
 						if( !l || !std::isfinite( l ) ) return (Real)-1.;
 						return (Real)pow( l , params.confidence );
