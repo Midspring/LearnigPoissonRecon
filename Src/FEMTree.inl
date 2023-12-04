@@ -869,7 +869,7 @@ typename FEMTree< Dim , Real >::template DensityEstimator< DensityDegree >* FEMT
 {
 	LocalDepth maxDepth = _spaceRoot->maxDepth();
 	splatDepth = std::max< LocalDepth >( 0 , std::min< LocalDepth >( splatDepth , maxDepth ) );
-	DensityEstimator< DensityDegree > *density = new DensityEstimator< DensityDegree >( splatDepth , CoDim , samplesPerNode );
+	DensityEstimator< DensityDegree > *density = new DensityEstimator< DensityDegree >( splatDepth , CoDim , samplesPerNode ); //shanchengzi: CoDim = 1, DensityDegree = 2
 	this->template updateDensityEstimator< CoDim , DensityDegree >( *density , samples , 0 , splatDepth , samplesPerNode );
 
 	return density;

@@ -304,7 +304,7 @@ void RegularTreeNode< Dim , NodeData , DepthAndOffsetType >::processNodes( NodeF
 	}
 	else
 	{
-		nodeFunctor( this );
+		nodeFunctor( this ); //shanchengzi: set node_index_type to _nodeCount++;
 		if( children ) for( int c=0 ; c<(1<<Dim) ; c++ )
 		{
 			nodeFunctor( children + c );

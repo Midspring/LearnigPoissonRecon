@@ -2886,7 +2886,7 @@ public:
 				_nodeInitializer( *node );
 				node->nodeData.flags &= mask;
 			};
-			_tree.processNodes( nodeFunctor );
+			_tree.processNodes( nodeFunctor ); //shanchengzi: reset all node indices by _nodeCount++;
 		}
 		return _nodeCount;
 	}

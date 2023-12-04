@@ -43,11 +43,11 @@ template< unsigned int CoDim , unsigned int Degree >
 Real FEMTree< Dim , Real >::_GetScaleValue( Point< Real , Dim > p ) const
 {
 	static_assert( ( Dim>=CoDim) , "[ERROR] Co-dimension exceeds dimension" );
-	static const int PointSupportStart = -BSplineSupportSizes< Degree >::SupportEnd , PointSupportEnd = -BSplineSupportSizes< Degree >::SupportStart;
-	static const int PointSupportSize = PointSupportEnd - PointSupportStart + 1;
+	static const int PointSupportStart = -BSplineSupportSizes< Degree >::SupportEnd /*-2/2 = -1*/, PointSupportEnd = -BSplineSupportSizes< Degree >::SupportStart /*(2+1)/2 = 1*/;
+	static const int PointSupportSize = PointSupportEnd - PointSupportStart + 1; //-1
 	static const int BSplineSupportStart = BSplineSupportSizes< Degree >::SupportStart , BSplineSupportEnd = BSplineSupportSizes< Degree >::SupportEnd;
-	static const int BSplineSupportSize = BSplineSupportEnd - BSplineSupportStart + 1;
-	double splineValues[Dim][Degree+1];
+	static const int BSplineSupportSize = BSplineSupportEnd - BSplineSupportStart + 1;//3
+	double splineValues[Dim][Degree+1];//[3][3]
 
 	// Evaluate the B-spline component functions at the position
 	for( int d=0 ; d<Dim ; d++ ) Polynomial< Degree >::BSplineComponentValues( p[d] , splineValues[d] );
@@ -154,7 +154,7 @@ template< unsigned int Dim , class Real >
 template< bool ThreadSafe , unsigned int CoDim , unsigned int WeightDegree >
 void FEMTree< Dim , Real >::_addWeightContribution( Allocator< FEMTreeNode > *nodeAllocator , DensityEstimator< WeightDegree >& densityWeights , FEMTreeNode* node , Point< Real , Dim > position , PointSupportKey< IsotropicUIntPack< Dim , WeightDegree > >& weightKey , Real weight )
 {
-	static const Real ScaleValue = _GetScaleValue< CoDim , WeightDegree >( 10 );
+	static const Real ScaleValue = _GetScaleValue< CoDim , WeightDegree >( 10 );//shanchengzi: CoDim=1, WeightDegree=2
 	double values[ Dim ][ BSplineSupportSizes< WeightDegree >::SupportSize ];
 	typename FEMTreeNode::template Neighbors< IsotropicUIntPack< Dim , BSplineSupportSizes< WeightDegree >::SupportSize > >& neighbors = weightKey.template getNeighbors< true , ThreadSafe >( node , nodeAllocator , _nodeInitializer );
 
