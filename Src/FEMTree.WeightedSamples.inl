@@ -155,7 +155,7 @@ template< bool ThreadSafe , unsigned int CoDim , unsigned int WeightDegree >
 void FEMTree< Dim , Real >::_addWeightContribution( Allocator< FEMTreeNode > *nodeAllocator , DensityEstimator< WeightDegree >& densityWeights , FEMTreeNode* node , Point< Real , Dim > position , PointSupportKey< IsotropicUIntPack< Dim , WeightDegree > >& weightKey , Real weight )
 {
 	static const Real ScaleValue = _GetScaleValue< CoDim , WeightDegree >( 10 );//shanchengzi: CoDim=1, WeightDegree=2
-	double values[ Dim ][ BSplineSupportSizes< WeightDegree >::SupportSize ];
+	double values[ Dim ][ BSplineSupportSizes< WeightDegree >::SupportSize ];//[Dim=3][SupportSize=3]
 	typename FEMTreeNode::template Neighbors< IsotropicUIntPack< Dim , BSplineSupportSizes< WeightDegree >::SupportSize > >& neighbors = weightKey.template getNeighbors< true , ThreadSafe >( node , nodeAllocator , _nodeInitializer );
 
 	densityWeights.reserve( nodeCount() );
